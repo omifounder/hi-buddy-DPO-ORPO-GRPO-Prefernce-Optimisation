@@ -33,10 +33,10 @@ Models are ranked by their **Overall Score**. Bold values indicate the model **m
 
 | Variant | Technical Reason for Selection / Rejection |
 | :--- | :--- |
-| **🥇 DPO+ORPO (4B)** | **The "Sweet Spot":** Crossed every quality threshold while maintaining a 4B footprint. Best balance of "Digital Peer" resonance and instruction following. |
-| **DPO-Teacher (12B)** | **The "Latency Wall":** Despite the high score, the 12B architecture creates >1s TTFT on mobile and failed the **Resonance** threshold by remaining too clinical. |
-| **GRPO-Final (4B)** | **The "Stability Tax":** Achieved the highest Empathy (9.5), but reinforcement learning caused "Instruction Drift"—ignoring formatting for emotional depth. |
-| **TIES/ORPO Baselines** | **The "Specialist Trap":** TIES-Merge excelled at empathy but lost logic; ORPO was safe but lacked the "human" warmth required for users. |
+| **🥇 DPO+ORPO (4B)** | **The "Sweet Spot":** This variant crossed every quality threshold while maintaining a 4B footprint. It represents the best balance of "Digital Peer" resonance and instruction following for mobile deployment. |
+| **🥈 GRPO-Final (4B)** | **The "Stability Tax":** While it achieved the highest Empathy peak (9.5), the reinforcement learning pass caused "Instruction Drift." The model occasionally ignored formatting constraints in favor of emotional depth. |
+| **DPO-Teacher (12B)** | **The "Latency Wall":** Despite the high total score, the 12B architecture creates a >1s Time-to-First-Token (TTFT) on mobile. It also failed the **Resonance** threshold by remaining too clinical/robotic. |
+| **Baselines (TIES/ORPO)** | **The "Specialist Trap":** TIES-Merge was excellent at empathy but lost logic; ORPO was safe but lacked the human warmth required for adolescent mental health support. |
 
 > **💡 Key Insight:** Our results confirm the **Empathy Plasticity Hypothesis**: Smaller models (4B) are more responsive to persona alignment than larger models (12B). The transition from BASE to DPO+ORPO represents a **10.3% capability "dividend"** without increasing latency.
 
