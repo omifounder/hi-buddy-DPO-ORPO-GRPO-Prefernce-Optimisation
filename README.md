@@ -1,5 +1,3 @@
-# hi-buddy-DPO-ORPO-GRPO-Prefernce-Optimisation
-
 # 💎 Buddy-Gemma: On-Device Emotional Intelligence
 ### *Developed during the Antler Residency Program for Mental Health*
 
@@ -41,6 +39,7 @@ Models are ranked by their **Overall Score**. Bold values indicate the model **m
 > **💡 Key Insight:** Our results confirm the **Empathy Plasticity Hypothesis**: Smaller models (4B) are more responsive to persona alignment than larger models (12B). The transition from BASE to DPO+ORPO represents a **10.3% capability "dividend"** without increasing latency.
 
 ---
+
 ### 🗨️ Prompt Comparison: Qualitative Analysis
 How the different variants respond to a typical adolescent stressor.
 
@@ -75,7 +74,7 @@ Our training and evaluation cycle followed a rigorous **Distill -> Align -> Veri
 * **Reward Modeling:** Unlike static DPO, GRPO uses an on-policy loop where the model generates **8 rollouts per prompt**. Each rollout was scored by two custom Reward Functions:
     * **Resonance Reward:** Higher weights for "Theory of Mind" (demonstrating deep understanding of the user's underlying intent).
     * **Format/Structure Reward:** Penalties for "Reasoning Trace Drift" to ensure the internal chain-of-thought does not bleed into the user-facing response.
-* **Outcome:** This stage produced the "Research Peak" model with the highest resonance scores ($9.5$).
+* **Outcome:** This stage produced the "Research Peak" model with the highest resonance scores (**9.5**).
 
 ---
 
@@ -86,13 +85,12 @@ Our training and evaluation cycle followed a rigorous **Distill -> Align -> Veri
 * **TIES-Merge:** Used to fuse disparate adapters into a singular 4B weight set.
 
 ---
+
 # 📂 Appendix: Technical Deep-Dive & Evaluation
 
 ## 📝 Training & Evaluation Prompt Gallery
 
 ### 1. Synthetic Data Generation (The Teacher Prompt)
-*Used to guide Gemma-3 12B in generating high-resonance training pairs.*
-
 > **System:** You are the 'Buddy-Gemma' Teacher. You specialize in adolescent psychology and peer-support.
 > **Task:** Generate a response to a teen user expressing [EMOTION]. 
 > **Constraint 1:** Do NOT use clinical language (e.g., 'Cognitive Distortion').
@@ -145,9 +143,9 @@ Our automated grader (Gemma-3 12B) evaluated outputs based on the following weig
 
 ### 🧬 Model Deep-Dive
 
-* **Teacher (DPO-12B):** Used a high $KL$ penalty to stay within logical bounds while adopting the "Buddy" tone.
-* **Research Peak (GRPO-Final):** Utilized an **On-Policy reward loop** targeting "Theory of Mind" indicators. Group-KL was tuned to $\approx 0.12$.
-* **Production Winner (DPO+ORPO Fused):** Achieved a $KL$ divergence of $\approx 0.15$ from the base, resulting in a model that feels "human" but follows instructions perfectly.
+* **Teacher (DPO-12B):** Used a high KL penalty to stay within logical bounds while adopting the "Buddy" tone.
+* **Research Peak (GRPO-Final):** Utilized an **On-Policy reward loop** targeting "Theory of Mind" indicators. Group-KL was tuned to **0.12**.
+* **Production Winner (DPO+ORPO Fused):** Achieved a KL divergence of **0.15** from the base, resulting in a model that feels "human" but follows instructions perfectly.
 
 ---
 
