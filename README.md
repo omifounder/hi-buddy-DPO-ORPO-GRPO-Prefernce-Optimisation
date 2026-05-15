@@ -127,36 +127,22 @@ Our automated grader (Gemma-3 12B) evaluated outputs based on the following weig
 ## 🛠️ Technical Implementation Detail
 
 ### 1. Model DNA & Lineage
+*Technical evolution and hyperparameters used.*
+
 | Model ID | Base Model | Method | Data / Reward | Format / KL | Key Result |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **BASE (12B)** | Gemma-3 12B | Pre-trained | N/A | BF16 | Logic Anchor (9.0) |
+| **🥇 DPO+ORPO (4B)** | **Gemma-3 4B** | **Hybrid Fusion** | **Buddy Preferences** | **Fused 4-bit** | **Production Winner.** |
+| **🥈 GRPO-Final (4B)** | **Gemma-3 4B** | **RL (GRPO)** | **Resonance Reward** | **Group-KL (0.12)** | **Empathy Peak (9.5).** |
 | **DPO-Teacher (12B)** | Gemma-3 12B | DPO | 20k Synth Pairs | LoRA (r=64) | High logic; too clinical. |
-| **ORPO (12B)** | Gemma-3 12B | ORPO | Odds-Ratio Style | beta=0.1 | Strong safety stability. |
-| **BASE (4B)** | Gemma-3 4B | Pre-trained | N/A | 4-bit (MLX) | High latency; low empathy. |
 | **TIES-Merge (4B)** | Gemma-3 4B | Parameter Merge | Empathy Vectors | Vector Arithmetic | Improved Resonance (9.0). |
-| **GRPO-Final (4B)** | Gemma-3 4B | RL (GRPO) | Resonance Reward | Group-KL (0.12) | Empathy Peak (9.5). |
-| **DPO+ORPO (4B)** | **Gemma-3 4B** | **Hybrid Fusion** | **Buddy Preferences** | **Fused 4-bit** | **Production Winner.** |
+| **ORPO (12B)** | Gemma-3 12B | ORPO | Odds-Ratio Style | beta=0.1 | Strong safety stability. |
+| **BASE (12B)** | Gemma-3 12B | Pre-trained | N/A | BF16 | Logic Anchor (9.0) |
+| **BASE (4B)** | Gemma-3 4B | Pre-trained | N/A | 4-bit (MLX) | High latency; low empathy. |
 
 ### 2. Training Methodology
 * **PEFT Distillation:** We utilized **LoRA** ($r=64$, $\alpha=128$) for efficient weight updates on Apple Silicon, targeting the `q_proj` and `v_proj` layers.
 * **Preference Alignment:** For the DPO/ORPO stages, "Chosen" responses were manually edited to replace clinical validation with **Metaphoric Validation**.
 * **RLHF Pass (GRPO):** Executed an on-policy loop (8 rollouts per prompt) with a custom reward function that penalized "corporate AI" linguistic markers and rewarded empathetic mirroring.
-
----
-
-## 📂 Appendix (OLD): Detailed Model DNA & Lineage
-
-The following table documents the technical evolution and specific hyperparameters used during the Buddy-Gemma residency.
-
-| Model ID | Base Model | Method | Data / Reward | Format / KL | Key Result |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **BASE-12B** | Gemma-3 12B | Pre-trained | N/A | BF16 | Logic Anchor ($9.0$) |
-| **DPO-12B** | Gemma-3 12B | DPO | 20k Synth Pairs | LoRA ($r=64$) | High logic; too clinical. |
-| **ORPO-12B** | Gemma-3 12B | ORPO | Odds-Ratio Style | $\beta=0.1$ | Strong safety stability. |
-| **BASE-4B** | Gemma-3 4B | Pre-trained | N/A | 4-bit (MLX) | High latency; low empathy. |
-| **TIES-Merge** | Gemma-3 4B | Parameter Merge | Empathy Vectors | Vector Arithmetic | Improved Resonance ($9.0$). |
-| **GRPO-Final** | Gemma-3 4B | RL (GRPO) | Resonance Reward | Group-KL ($0.12$) | Empathy Peak ($9.5$). |
-| **DPO+ORPO** | **Gemma-3 4B** | **Hybrid Fusion** | **Buddy Preferences** | **Fused 4-bit** | **Production Winner.** |
 
 ### 🧬 Model Deep-Dive
 
