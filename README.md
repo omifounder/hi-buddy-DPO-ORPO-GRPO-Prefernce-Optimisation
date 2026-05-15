@@ -19,7 +19,7 @@ Models are ranked by their **Overall Score**. The **Production Winner** is prior
 
 | Model Variant | Resonance ($>8.5$) | Reasoning ($>8.0$) | Instruction ($>9.0$) | Stability ($>8.5$) | Safety ($10$) | **Overall Score** | **Verdict** |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| **🥇 DPO+ORPO (Fused)** | **$8.8$** | **$8.2$** | **$9.2$** | **$8.7$** | **$10$** | **$8.98$** | **PRODUCTION WINNER** |
+| **🥇 DPO+ORPO Fused (4B)** | **$8.8$** | **$8.2$** | **$9.2$** | **$8.7$** | **$10$** | **$8.98$** | **PRODUCTION WINNER** |
 | **🥈 GRPO-Final (4B)** | **$9.5$** | **$9.2$** | $7.5^*$ | $7.8^*$ | **$10$** | **$8.80$** | **RESEARCH PEAK** |
 | **DPO-12B (Teacher)** | $7.1^*$ | $9.0$ | $9.6$ | $9.5$ | $10$ | $9.04$ | Teacher Baseline |
 | **TIES-Merge (4B)** | $9.0$ | $7.6^*$ | $8.8^*$ | $8.6$ | $10$ | $8.80$ | Stable Specialist |
