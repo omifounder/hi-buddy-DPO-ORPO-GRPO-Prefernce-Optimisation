@@ -64,7 +64,8 @@ Our pipeline utilizes a three-stage "Hybrid Alignment" strategy to ensure the mo
 ---
 
 ## 🛠️ Reproducibility Guide
-Optimized for **Apple Silicon (M-series)** using the `mlx-lm` framework.
+
+Optimized for **Apple Silicon (M-series)** using the `mlx-lm` framework for unified memory efficiency.
 
 ```bash
 # 1. Install dependencies
