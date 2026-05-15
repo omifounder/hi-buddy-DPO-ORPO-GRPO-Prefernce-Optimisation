@@ -70,6 +70,9 @@ Optimized for **Apple Silicon (M-series)** using the `mlx-lm` framework.
 # 1. Install dependencies
 pip install mlx-lm
 
+# 2. Run the Evolution Benchmark
+python 42_ultimate_benchmark_v2.py
+
 ---
 
 ## 📂 Appendix: Detailed Model DNA & Lineage
@@ -91,5 +94,4 @@ The following table documents the technical evolution and specific hyperparamete
 * **Research Peak (GRPO-Final):** Unlike static optimization, the GRPO model used an **On-Policy reward loop**. The reward function specifically targeted "Theory of Mind" indicators (e.g., use of metaphors, emotional mirroring). The Group-KL was tuned to $\approx 0.12$ to prevent the model from collapsing into repetitive "safe" patterns.
 * **Production Winner (DPO+ORPO Fused):** This model utilized a "monolithic" alignment approach. By combining DPO's preference learning with ORPO's style penalty, we achieved a $KL$ divergence of $\approx 0.15$ from the base, resulting in a model that feels "human" but behaves with strict instruction-following.
 
-# 2. Run the Evolution Benchmark
-python 42_ultimate_benchmark_v2.py
+
