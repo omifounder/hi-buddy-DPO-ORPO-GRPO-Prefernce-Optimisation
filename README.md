@@ -63,19 +63,6 @@ Our pipeline utilizes a three-stage "Hybrid Alignment" strategy to ensure the mo
 
 ---
 
-## 🛠️ Reproducibility Guide
-
-Optimized for **Apple Silicon (M-series)** using the `mlx-lm` framework for unified memory efficiency.
-
-```bash
-# 1. Install dependencies
-pip install mlx-lm
-
-# 2. Run the Evolution Benchmark
-python 42_ultimate_benchmark_v2.py
-
----
-
 ## 📂 Appendix: Detailed Model DNA & Lineage
 
 The following table documents the technical evolution and specific hyperparameters used during the Buddy-Gemma residency.
@@ -95,6 +82,18 @@ The following table documents the technical evolution and specific hyperparamete
 * **Teacher (DPO-12B):** Used a high $KL$ penalty to stay within logical bounds while adopting the "Buddy" tone.
 * **Research Peak (GRPO-Final):** Utilized an **On-Policy reward loop** targeting "Theory of Mind" indicators. Group-KL was tuned to $\approx 0.12$.
 * **Production Winner (DPO+ORPO Fused):** Achieved a $KL$ divergence of $\approx 0.15$ from the base, resulting in a model that feels "human" but follows instructions perfectly.
+
+---
+
+## 🛠️ Reproducibility Guide
+
+Optimized for **Apple Silicon (M-series)** using the `mlx-lm` framework for unified memory efficiency.
+
+# 1. Install dependencies
+pip install mlx-lm
+
+# 2. Run the Evolution Benchmark
+python 42_ultimate_benchmark_v2.py
 
 ---
 
