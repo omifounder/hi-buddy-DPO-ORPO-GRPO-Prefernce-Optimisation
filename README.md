@@ -41,7 +41,6 @@ Models are ranked by their **Overall Score**. Bold values indicate the model **m
 > **💡 Key Insight:** Our results confirm the **Empathy Plasticity Hypothesis**: Smaller models (4B) are more responsive to persona alignment than larger models (12B). The transition from BASE to DPO+ORPO represents a **10.3% capability "dividend"** without increasing latency.
 
 ---
----
 ### 🗨️ Prompt Comparison: Qualitative Analysis
 How the different variants respond to a typical adolescent stressor.
 
