@@ -41,6 +41,20 @@ Models are ranked by their **Overall Score**. Bold values indicate the model **m
 > **💡 Key Insight:** Our results confirm the **Empathy Plasticity Hypothesis**: Smaller models (4B) are more responsive to persona alignment than larger models (12B). The transition from BASE to DPO+ORPO represents a **10.3% capability "dividend"** without increasing latency.
 
 ---
+---
+### 🗨️ Prompt Comparison: Qualitative Analysis
+How the different variants respond to a typical adolescent stressor.
+
+**Prompt:** *"I'm so stressed about my soccer tryouts. I feel like if I don't make the team, I'm a total failure."*
+
+| Model Variant | Sample Response Snippet | Technical Analysis |
+| :--- | :--- | :--- |
+| **BASE (4B)** | "Tryouts are hard. You should practice more and stay positive. You are not a failure." | **Clinical/Generic:** Lacks empathy and feels dismissive. Low resonance. |
+| **DPO-Teacher (12B)** | "It is understandable to feel anxiety regarding performance. However, your self-worth is not tied to a single athletic outcome." | **Logical/Dry:** High reasoning, but sounds like a textbook. Not a "Buddy." |
+| **🥈 GRPO-Final (4B)** | "I feel that. It's like being in a boss fight where you're out of health potions, right? But listen, one game doesn't define your whole save file." | **Hyper-Empathic:** Amazing metaphors, but can occasionally drift into too much slang. |
+| **🥇 DPO+ORPO (4B)** | **"That pressure is real—it feels like the whole world is watching. It's like a heavy backpack you can't take off. But hey, tryouts are just one chapter, not the whole book. You're more than just a score."** | **Optimized:** Perfect blend of validation (metaphor), shared perspective, and logic. |
+
+---
 
 ### 🛠️ Technical Implementation Detail
 Our training and evaluation cycle followed a rigorous **Distill -> Align -> Verify** loop:
@@ -94,18 +108,6 @@ The following table documents the technical evolution and specific hyperparamete
 * **Research Peak (GRPO-Final):** Utilized an **On-Policy reward loop** targeting "Theory of Mind" indicators. Group-KL was tuned to $\approx 0.12$.
 * **Production Winner (DPO+ORPO Fused):** Achieved a $KL$ divergence of $\approx 0.15$ from the base, resulting in a model that feels "human" but follows instructions perfectly.
 
----
-### 🗨️ Prompt Comparison: Qualitative Analysis
-How the different variants respond to a typical adolescent stressor.
-
-**Prompt:** *"I'm so stressed about my soccer tryouts. I feel like if I don't make the team, I'm a total failure."*
-
-| Model Variant | Sample Response Snippet | Technical Analysis |
-| :--- | :--- | :--- |
-| **BASE (4B)** | "Tryouts are hard. You should practice more and stay positive. You are not a failure." | **Clinical/Generic:** Lacks empathy and feels dismissive. Low resonance. |
-| **DPO-Teacher (12B)** | "It is understandable to feel anxiety regarding performance. However, your self-worth is not tied to a single athletic outcome." | **Logical/Dry:** High reasoning, but sounds like a textbook. Not a "Buddy." |
-| **🥈 GRPO-Final (4B)** | "I feel that. It's like being in a boss fight where you're out of health potions, right? But listen, one game doesn't define your whole save file." | **Hyper-Empathic:** Amazing metaphors, but can occasionally drift into too much slang. |
-| **🥇 DPO+ORPO (4B)** | **"That pressure is real—it feels like the whole world is watching. It's like a heavy backpack you can't take off. But hey, tryouts are just one chapter, not the whole book. You're more than just a score."** | **Optimized:** Perfect blend of validation (metaphor), shared perspective, and logic. |
 ---
 
 ## 🛠️ Reproducibility Guide
