@@ -49,9 +49,6 @@ Our pipeline utilizes a three-stage "Hybrid Alignment" strategy to ensure the mo
     * **Format/Structure Reward:** Penalties for "Reasoning Trace Drift" to ensure the internal chain-of-thought does not bleed into the user-facing response.
 * **Outcome:** This stage produced the "Research Peak" model with the highest resonance scores ($9.5$).
 
-### 4. Crisis Redirect Layer
-A specialized subset of 1,000 samples was used to train the **Crisis Pivot**. If a trigger word is detected, the model is trained to maintain its warm tone but immediately bridge the user to 988 (US) or 111 (UK) resources.
-
 ---
 
 ## 🧬 Project Architecture & Lineage
