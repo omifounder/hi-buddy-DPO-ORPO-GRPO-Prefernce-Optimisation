@@ -1,7 +1,10 @@
 # 💎 Buddy-Gemma: On-Device Emotional Intelligence
-### *Developed during the Antler Residency Program for Mental Health*
+### *Antler Residency Prototype for Adolescent Mental Health*
 
-**Buddy-Gemma** is a research-led initiative to build a high-empathy, hyper-efficient mental health companion. By distilling the reasoning and "Theory of Mind" capabilities of **Gemma-3 12B** into a **4B-4bit** edge model, we provide a private, <300ms latency support tool for adolescent mental health.
+**Buddy-Gemma** is a research-led initiative developed during the **Antler Residency** to solve the "Clinical Coldness" of existing AI. By distilling the "Theory of Mind" capabilities of **Gemma-3 12B** into a **4B-4bit** edge model, we created a "Digital Peer" that validates emotions before providing structure—all while ensuring absolute privacy via **On-Device execution** (<300ms latency) on Apple Silicon.
+
+* **The Goal:** Build a high-empathy companion that speaks like a peer, not a therapist.
+* **The constraint:** Local execution on M-series chips to guarantee 100% data privacy.
 
 ---
 
