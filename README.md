@@ -54,20 +54,20 @@ How the different variants respond to a typical adolescent stressor.
 
 ---
 
-### 🛠️ Technical Implementation Detail
-Our training and evaluation cycle followed a rigorous **Distill -> Align -> Verify** loop:
+## 🧠 Data Strategy & Training
+Our pipeline utilizes a three-stage "Hybrid Alignment" strategy to ensure the model is both logically sound and emotionally resonant.
 
 * **Training Phase:** We utilized **Parameter-Efficient Fine-Tuning (PEFT)** via LoRA. For the DPO and ORPO stages, we used a preference dataset where the "Chosen" responses were specifically edited to include **Metaphoric Validation** (mirroring the user's emotion through non-clinical analogies).
 * **Evaluation Phase:** We ran a custom **LLM-as-a-Judge** pipeline. Each model variant was prompted with 50 unique "Buddy Stress Tests." Their responses were then graded by a locked-down instance of Gemma-3 12B using our proprietary 4-point Buddy Rubric.
 * **RLHF Pass:** The GRPO training involved 8 simultaneous rollouts per prompt, where the reward function penalized "corporate" phrases like *"As an AI, I am here to help"* and rewarded peer-support language.
 
 ### 1. Synthetic Distillation (The Teacher)
-* **Dataset:** 15,000 multi-turn dialogues.
+* **Dataset:** **15,000 multi-turn dialogues.**
 * **Strategy:** We utilized the **Gemma-3 12B Teacher** to simulate teen-centric scenarios (e.g., academic burnout, friendship friction). The Teacher was instructed to generate responses following the `soul.md` framework: prioritizing validation before cognitive reframing.
 
 ### 2. Preference Alignment (DPO/ORPO)
-* **Dataset:** 5,000 "Buddy-vs-Clinical" preference pairs.
-* **Strategy:** We curated sets where the **Chosen** response utilized peer-aligned metaphors (e.g., *"It’s okay to feel like your battery is at 5%"*) and the **Rejected** response was overly clinical or list-heavy. **ORPO** was then applied to penalize the model whenever it drifted into a "robotic therapist" archetype.
+* **Dataset:** **5,000 "Buddy-vs-Clinical" preference pairs.**
+* **Strategy:** We curated sets where the **Chosen** response utilized peer-aligned metaphors (e.g., *"It’s okay to feel like your battery is at 5%"*) and the **Rejected** response was clinical or list-heavy. **ORPO** was then applied to penalize the model whenever it drifted into a "robotic therapist" archetype.
 
 ### 3. On-Policy Reinforcement (GRPO)
 * **Mechanism:** Group Relative Policy Optimization (Reinforcement Learning).
