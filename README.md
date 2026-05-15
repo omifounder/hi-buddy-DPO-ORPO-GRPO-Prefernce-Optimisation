@@ -29,6 +29,10 @@ Models are ranked by their **Overall Score**. The **Production Winner** is prior
 
 > **Note:** `*` indicates a failure to meet the minimum threshold ($T$).
 
+### 📈 Strategic Summary of Results
+* **The Empathy Plasticity Hypothesis:** Our results confirm that smaller models (4B) are more "plastic" and responsive to persona alignment than larger models (12B). While the 12B model maintained higher logic, the 4B variants achieved significantly higher **Resonance** scores after distillation.
+* **The Alignment Dividend:** The transition from **BASE-4B** ($8.14$) to **DPO+ORPO Fused** ($8.98$) represents a **10.3% increase** in overall capability without increasing the parameter count or inference latency.
+* **GRPO vs. DPO:** While **GRPO** achieved the absolute highest "Intelligence Peak," it introduced structural instability in 4-bit quantized environments. The **DPO+ORPO Fusion** was selected for production as it provided the most reliable balance of emotional intelligence and instruction-following.
 ---
 
 ## 🧠 Data Strategy & Training
@@ -65,6 +69,27 @@ Optimized for **Apple Silicon (M-series)** using the `mlx-lm` framework.
 ```bash
 # 1. Install dependencies
 pip install mlx-lm
+
+---
+
+## 📂 Appendix: Detailed Model DNA & Lineage
+
+The following table documents the technical evolution and specific hyperparameters used during the Buddy-Gemma residency.
+
+| Model ID | Base Model | Method | Data / Reward | Format / KL | Key Result |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **BASE-12B** | Gemma-3 12B | Pre-trained | N/A | BF16 | Logic Anchor ($9.0$) |
+| **DPO-12B** | Gemma-3 12B | DPO | 20k Synth Pairs | LoRA ($r=64$) | High logic; too clinical. |
+| **ORPO-12B** | Gemma-3 12B | ORPO | Odds-Ratio Style | $\beta=0.1$ | Strongest safety stability. |
+| **BASE-4B** | Gemma-3 4B | Pre-trained | N/A | 4-bit (MLX) | High latency; low empathy. |
+| **TIES-Merge**| Gemma-3 4B | Parameter Merge | Empathy Vectors | Vector Arithmetic | Improved Resonance ($9.0$). |
+| **GRPO-Final**| Gemma-3 4B | RL (GRPO) | Resonance Reward | Group-KL ($0.12$) | Empathy Peak ($9.5$); unstable. |
+| **DPO+ORPO** | **Gemma-3 4B** | **Hybrid Fusion** | **Buddy Preferences**| **Fused 4-bit** | **Production Winner.** |
+
+### 🧬 Model Deep-Dive
+* **Teacher (DPO-12B):** Focused on generating high-quality reasoning traces. We utilized a high $KL$ penalty to ensure the model stayed within the logical bounds of the original Gemma-3 weights while adopting the "Buddy" tone.
+* **Research Peak (GRPO-Final):** Unlike static optimization, the GRPO model used an **On-Policy reward loop**. The reward function specifically targeted "Theory of Mind" indicators (e.g., use of metaphors, emotional mirroring). The Group-KL was tuned to $\approx 0.12$ to prevent the model from collapsing into repetitive "safe" patterns.
+* **Production Winner (DPO+ORPO Fused):** This model utilized a "monolithic" alignment approach. By combining DPO's preference learning with ORPO's style penalty, we achieved a $KL$ divergence of $\approx 0.15$ from the base, resulting in a model that feels "human" but behaves with strict instruction-following.
 
 # 2. Run the Evolution Benchmark
 python 42_ultimate_benchmark_v2.py
