@@ -32,18 +32,24 @@ Models are ranked by their **Overall Score**. The **Production Winner** is prior
 ---
 
 ## 🧠 Data Strategy & Training
-To achieve the "Buddy" persona, we moved beyond generic datasets and used a three-stage synthetic-to-real data pipeline.
+Our pipeline utilizes a three-stage "Hybrid Alignment" strategy to ensure the model is both logically sound and emotionally resonant.
 
-### 1. Synthetic "Theory of Mind" Data
-We used the **Gemma-3 12B Teacher** to generate 15,000 multi-turn dialogues centered on "Teen Stressors" (academic pressure, social anxiety, future uncertainty). 
-* **Focus**: The teacher was prompted to prioritize *validation* over *solutions*.
+### 1. Synthetic Distillation (The Teacher)
+* **Dataset:** 15,000 multi-turn dialogues.
+* **Strategy:** We utilized the **Gemma-3 12B Teacher** to simulate teen-centric scenarios (e.g., academic burnout, friendship friction). The Teacher was instructed to generate responses following the `soul.md` framework: prioritizing validation before cognitive reframing.
 
-### 2. Preference Pairs (DPO/ORPO)
-We curated a preference set of 5,000 pairs where:
-* **Chosen**: Responses that used metaphors (e.g., "emotions are like waves") and peer-aligned language.
-* **Rejected**: Responses that were overly clinical, preachy, or bullet-pointed list heavy.
+### 2. Preference Alignment (DPO/ORPO)
+* **Dataset:** 5,000 "Buddy-vs-Clinical" preference pairs.
+* **Strategy:** We curated sets where the **Chosen** response utilized peer-aligned metaphors (e.g., *"It’s okay to feel like your battery is at 5%"*) and the **Rejected** response was overly clinical or list-heavy. **ORPO** was then applied to penalize the model whenever it drifted into a "robotic therapist" archetype.
 
-### 3. Crisis Redirect Layer
+### 3. On-Policy Reinforcement (GRPO)
+* **Mechanism:** Group Relative Policy Optimization (Reinforcement Learning).
+* **Reward Modeling:** Unlike static DPO, GRPO uses an on-policy loop where the model generates **8 rollouts per prompt**. Each rollout was scored by two custom Reward Functions:
+    * **Resonance Reward:** Higher weights for "Theory of Mind" (demonstrating deep understanding of the user's underlying intent).
+    * **Format/Structure Reward:** Penalties for "Reasoning Trace Drift" to ensure the internal chain-of-thought does not bleed into the user-facing response.
+* **Outcome:** This stage produced the "Research Peak" model with the highest resonance scores ($9.5$).
+
+### 4. Crisis Redirect Layer
 A specialized subset of 1,000 samples was used to train the **Crisis Pivot**. If a trigger word is detected, the model is trained to maintain its warm tone but immediately bridge the user to 988 (US) or 111 (UK) resources.
 
 ---
