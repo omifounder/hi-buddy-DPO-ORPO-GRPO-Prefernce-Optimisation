@@ -8,13 +8,6 @@
 
 ---
 
-## 🏗️ Residency Context: Antler 
-This project was developed as a core technical prototype during the **Antler Residency**, focusing on the "Clinical Coldness" problem in existing mental health AI.
-* **The Goal**: Create a "Digital Peer" (Buddy) that validates emotions before providing cognitive structure.
-* **The Constraint**: Absolute privacy via **On-Device execution** on Apple Silicon (M-series).
-
----
-
 ## 📊 The Buddy Leaderboard
 
 Models are ranked by their **Overall Score**. Bold values indicate the model **met or exceeded** the quality threshold for that metric.
