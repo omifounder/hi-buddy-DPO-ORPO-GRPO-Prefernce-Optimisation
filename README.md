@@ -89,12 +89,13 @@ The following table documents the technical evolution and specific hyperparamete
 
 Optimized for **Apple Silicon (M-series)** using the `mlx-lm` framework for unified memory efficiency.
 
+```bash
 # 1. Install dependencies
 pip install mlx-lm
 
 # 2. Run the Evolution Benchmark
 python 42_ultimate_benchmark_v2.py
-
+```
 ---
 
 ## ⚠️ Safety Disclaimer
