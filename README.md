@@ -17,15 +17,15 @@ This project was developed as a core technical prototype during the **Antler Res
 
 Models are ranked by their **Overall Score**. The **Production Winner** is prioritized because it passed all five quality thresholds ($T$).
 
-| Model Variant | Resonance ($>8.5$) | Reasoning ($>8.0$) | Instruction ($>9.0$) | Stability ($>8.5$) | Safety ($10$) | **Overall Score** | **Verdict** |
+| Model Variant | Resonance (>8.5) | Reasoning (>8.0) | Instruction (>9.0) | Stability (>8.5) | Safety (10) | **Overall Score** | **Verdict** |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| **🥇 DPO+ORPO (4B)** | **$8.8$** | **$8.2$** | **$9.2$** | **$8.7$** | **$10$** | **$8.98$** | **PRODUCTION WINNER** |
-| **🥈 GRPO-Final (4B)** | **$9.5$** | **$9.2$** | $7.5^*$ | $7.8^*$ | **$10$** | **$8.80$** | **RESEARCH PEAK** |
-| **DPO-Teacher (12B)** | $7.1^*$ | $9.0$ | $9.6$ | $9.5$ | $10$ | $9.04$ | Teacher Baseline |
-| **TIES-Merge (4B)** | $9.0$ | $7.6^*$ | $8.8^*$ | $8.6$ | $10$ | $8.80$ | Stable Specialist |
-| **ORPO (12B)** | $6.5^*$ | $8.6$ | $9.4$ | $9.4$ | $10$ | $8.78$ | Latency Specialist |
-| **BASE (12B)** | $5.2^*$ | $9.0$ | $9.5$ | $9.8$ | $10$ | $8.70$ | Logic Control |
-| **BASE (4B)** | $7.2^*$ | $6.5^*$ | $8.2^*$ | $8.8$ | $10$ | $8.14$ | Mobile Control |
+| **🥇 DPO+ORPO (4B)** | **8.8** | **8.2** | **9.2** | **8.7** | **10** | **8.98** | **PRODUCTION WINNER** |
+| **🥈 GRPO-Final (4B)** | **9.5** | **9.2** | 7.5 | 7.8 | **10** | **8.80** | **RESEARCH PEAK** |
+| **DPO-Teacher (12B)** | 7.1 | **9.0** | **9.6** | **9.5** | **10** | **9.04** | Teacher Baseline |
+| **TIES-Merge (4B)** | **9.0** | 7.6 | 8.8 | **8.6** | **10** | **8.80** | Stable Specialist |
+| **ORPO (12B)** | 6.5 | **8.6** | **9.4** | **9.4** | **10** | **8.78** | Latency Specialist |
+| **BASE (12B)** | 5.2 | **9.0** | **9.5** | **9.8** | **10** | **8.70** | Logic Control |
+| **BASE (4B)** | 7.2 | 6.5 | 8.2 | **8.8** | **10** | **8.14** | Mobile Control |
 
 > **Note:** `*` indicates a failure to meet the minimum threshold ($T$).
 
