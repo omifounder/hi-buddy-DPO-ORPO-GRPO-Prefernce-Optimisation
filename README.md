@@ -1,21 +1,22 @@
 # hi-buddy-DPO-ORPO-GRPO-Prefernce-Optimisation
+
 # 💎 Buddy-Gemma: On-Device Emotional Intelligence
 ### *Developed during the Antler Residency Program for Mental Health*
 
-**Buddy-Gemma** is a research-led initiative to build a high-empathy, hyper-efficient mental health companion. By distilling the reasoning of **Gemma-3 12B** into a **4B-4bit** edge model, we provide a private, <300ms latency support tool for adolescent mental health.
+**Buddy-Gemma** is a research-led initiative to build a high-empathy, hyper-efficient mental health companion. By distilling the reasoning and "Theory of Mind" capabilities of **Gemma-3 12B** into a **4B-4bit** edge model, we provide a private, <300ms latency support tool for adolescent mental health.
 
 ---
 
 ## 🏗️ Residency Context: Antler 
-This project was developed as a core technical prototype during the **Antler Residency**. The focus was on solving the "Clinical Coldness" problem in current mental health AI. 
-* **The Goal**: Create a "Digital Peer" (Buddy) that validates emotions before providing structure.
-* **The Constraint**: Absolute privacy via **On-Device execution** (no data leaves the phone).
+This project was developed as a core technical prototype during the **Antler Residency**, focusing on the "Clinical Coldness" problem in existing mental health AI.
+* **The Goal**: Create a "Digital Peer" (Buddy) that validates emotions before providing cognitive structure.
+* **The Constraint**: Absolute privacy via **On-Device execution** on Apple Silicon (M-series).
 
 ---
 
 ## 📊 The Buddy Leaderboard
 
-Models are ranked by their **Overall Score**. The **Production Winner** is prioritized because it passed all five quality thresholds ($T$).
+Models are ranked by their **Overall Score**. Bold values indicate the model **met or exceeded** the quality threshold for that metric.
 
 | Model Variant | Resonance (>8.5) | Reasoning (>8.0) | Instruction (>9.0) | Stability (>8.5) | Safety (10) | **Overall Score** | **Verdict** |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
@@ -27,12 +28,18 @@ Models are ranked by their **Overall Score**. The **Production Winner** is prior
 | **BASE (12B)** | 5.2 | **9.0** | **9.5** | **9.8** | **10** | **8.70** | Logic Control |
 | **BASE (4B)** | 7.2 | 6.5 | 8.2 | **8.8** | **10** | **8.14** | Mobile Control |
 
-> **Note:** `*` indicates a failure to meet the minimum threshold ($T$).
+### 🎯 Selection Logic & Trade-offs
+*Why the 8.98 model was chosen for production over the 9.04 baseline.*
 
-### 📈 Strategic Summary of Results
-* **The Empathy Plasticity Hypothesis:** Our results confirm that smaller models (4B) are more "plastic" and responsive to persona alignment than larger models (12B). While the 12B model maintained higher logic, the 4B variants achieved significantly higher **Resonance** scores after distillation.
-* **The Alignment Dividend:** The transition from **BASE-4B** ($8.14$) to **DPO+ORPO Fused** ($8.98$) represents a **10.3% increase** in overall capability without increasing the parameter count or inference latency.
-* **GRPO vs. DPO:** While **GRPO** achieved the absolute highest "Intelligence Peak," it introduced structural instability in 4-bit quantized environments. The **DPO+ORPO Fusion** was selected for production as it provided the most reliable balance of emotional intelligence and instruction-following.
+| Variant | Technical Reason for Selection / Rejection |
+| :--- | :--- |
+| **🥇 DPO+ORPO (4B)** | **The "Sweet Spot":** Crossed every quality threshold while maintaining a 4B footprint. Best balance of "Digital Peer" resonance and instruction following. |
+| **DPO-Teacher (12B)** | **The "Latency Wall":** Despite the high score, the 12B architecture creates >1s TTFT on mobile and failed the **Resonance** threshold by remaining too clinical. |
+| **GRPO-Final (4B)** | **The "Stability Tax":** Achieved the highest Empathy (9.5), but reinforcement learning caused "Instruction Drift"—ignoring formatting for emotional depth. |
+| **TIES/ORPO Baselines** | **The "Specialist Trap":** TIES-Merge excelled at empathy but lost logic; ORPO was safe but lacked the "human" warmth required for users. |
+
+> **💡 Key Insight:** Our results confirm the **Empathy Plasticity Hypothesis**: Smaller models (4B) are more responsive to persona alignment than larger models (12B). The transition from BASE to DPO+ORPO represents a **10.3% capability "dividend"** without increasing latency.
+
 ---
 
 ## 🧠 Data Strategy & Training
