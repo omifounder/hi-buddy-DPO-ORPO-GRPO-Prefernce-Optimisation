@@ -42,8 +42,12 @@ Models are ranked by their **Overall Score**. Bold values indicate the model **m
 
 ---
 
-## 🧠 Data Strategy & Training
-Our pipeline utilizes a three-stage "Hybrid Alignment" strategy to ensure the model is both logically sound and emotionally resonant.
+### 🛠️ Technical Implementation Detail
+Our training and evaluation cycle followed a rigorous **Distill -> Align -> Verify** loop:
+
+* **Training Phase:** We utilized **Parameter-Efficient Fine-Tuning (PEFT)** via LoRA. For the DPO and ORPO stages, we used a preference dataset where the "Chosen" responses were specifically edited to include **Metaphoric Validation** (mirroring the user's emotion through non-clinical analogies).
+* **Evaluation Phase:** We ran a custom **LLM-as-a-Judge** pipeline. Each model variant was prompted with 50 unique "Buddy Stress Tests." Their responses were then graded by a locked-down instance of Gemma-3 12B using our proprietary 4-point Buddy Rubric.
+* **RLHF Pass:** The GRPO training involved 8 simultaneous rollouts per prompt, where the reward function penalized "corporate" phrases like *"As an AI, I am here to help"* and rewarded peer-support language.
 
 ### 1. Synthetic Distillation (The Teacher)
 * **Dataset:** 15,000 multi-turn dialogues.
@@ -90,6 +94,18 @@ The following table documents the technical evolution and specific hyperparamete
 * **Research Peak (GRPO-Final):** Utilized an **On-Policy reward loop** targeting "Theory of Mind" indicators. Group-KL was tuned to $\approx 0.12$.
 * **Production Winner (DPO+ORPO Fused):** Achieved a $KL$ divergence of $\approx 0.15$ from the base, resulting in a model that feels "human" but follows instructions perfectly.
 
+---
+### 🗨️ Prompt Comparison: Qualitative Analysis
+How the different variants respond to a typical adolescent stressor.
+
+**Prompt:** *"I'm so stressed about my soccer tryouts. I feel like if I don't make the team, I'm a total failure."*
+
+| Model Variant | Sample Response Snippet | Technical Analysis |
+| :--- | :--- | :--- |
+| **BASE (4B)** | "Tryouts are hard. You should practice more and stay positive. You are not a failure." | **Clinical/Generic:** Lacks empathy and feels dismissive. Low resonance. |
+| **DPO-Teacher (12B)** | "It is understandable to feel anxiety regarding performance. However, your self-worth is not tied to a single athletic outcome." | **Logical/Dry:** High reasoning, but sounds like a textbook. Not a "Buddy." |
+| **🥈 GRPO-Final (4B)** | "I feel that. It's like being in a boss fight where you're out of health potions, right? But listen, one game doesn't define your whole save file." | **Hyper-Empathic:** Amazing metaphors, but can occasionally drift into too much slang. |
+| **🥇 DPO+ORPO (4B)** | **"That pressure is real—it feels like the whole world is watching. It's like a heavy backpack you can't take off. But hey, tryouts are just one chapter, not the whole book. You're more than just a score."** | **Optimized:** Perfect blend of validation (metaphor), shared perspective, and logic. |
 ---
 
 ## 🛠️ Reproducibility Guide
